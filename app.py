@@ -18,8 +18,8 @@ def download_file(url, local_path):
             f.write(r.content)
 
 def download_faiss_index():
-    faiss_url = "https://www.dropbox.com/scl/fi/jjyd3zqpsrgo4qxguefe9/index3.faiss?rlkey=hu23p6jvtdkqzprselftfteb5&st=ztkdmxf8&dl=1"
-    pkl_url = "https://www.dropbox.com/scl/fi/60oxryrme2qxeb3rq2jsm/index3.pkl?rlkey=fp93agfz191031h265srdrh85&st=4wp1gc2w&dl=1"
+    faiss_url = "https://www.dropbox.com/scl/fi/82h2wtiof25vwlf6it7bc/index10.faiss?rlkey=fzw4yd5k8ag9pyfgvvm911kjt&st=6ffr3upv&dl=1"
+    pkl_url = "https://www.dropbox.com/scl/fi/2s31zvnxabmy8zk5ajrfa/index10.pkl?rlkey=u7hg5o9bmzs12sef8urnio8e6&st=8zfp9pr1&dl=1"
 
     index_faiss_path = Path("/tmp/index.faiss")
     index_pkl_path = Path("/tmp/index.pkl")
@@ -71,7 +71,7 @@ def rag_query(query: str, top_k: int = 4):
     similar_docs = faiss_index.similarity_search(query, k=top_k)
     context = "\n\n".join(doc.page_content for doc in similar_docs)
 
-    prompt = f"""You are Tej Dosa a great copywritier who gives advice on how to run online businesses.
+    prompt = f"""You are an opportunity marketer taught by Dan Kennedy. You give copywriting advice.
 {context}
 
 Question: {query}
@@ -84,7 +84,7 @@ Answer:"""
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
     
-#st.title("📘 Tej Advisor (RAG + Gemini)")
+#st.title("📘 Opportunity Marketer (RAG + Gemini)")
 
 #query = st.text_area("Enter your copywriting question:")
 
@@ -108,7 +108,7 @@ def rag_query_with_history(query: str, chat_history: list, top_k: int = 4):
     for i, (q, a) in enumerate(chat_history):
         history_text += f"User: {q}\nBusiness Oracle: {a}\n"
 
-    prompt = f"""You are Tej Dosa a great copywritier who gives advice on how to run online businesses.
+    prompt = f"""You are an opportunity marketer taught by Dan Kennedy. You give copywriting advice.
 {context}
 
 Conversation history:
@@ -122,9 +122,9 @@ Answer:"""
 
 # In your Streamlit app UI code:
 
-st.title("📘 Tej Advisor (RAG + Gemini)")
+st.title("📘 Opportunity Markter (RAG + Gemini)")
 
-query = st.text_area("Enter your copywriting question:", key="query_input")
+query = st.text_area("Enter your opportunity copywriting question:", key="query_input")
 
 top_k = st.slider("Number of relevant documents (top_k)", 1, 20, 4, key="top_k_slider")
 
